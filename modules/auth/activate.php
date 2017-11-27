@@ -1,5 +1,5 @@
 <?php
-require_once('../../mysql/connect.php');
+require_once('auth.php');
 $filters = array(
     'token' => FILTER_SANITIZE_STRING
 );

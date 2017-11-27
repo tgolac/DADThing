@@ -17,3 +17,22 @@ function hash_password($password, $salt = null)
         );
     } else die("Invalid Password Configuration");
 }
+
+/**
+ * @param $input array
+ * @param $filter array filters
+ *
+ * If an optional or required value is not provided the field is presumed to be required
+ * @return bool true if array valid
+ */
+function filter_input_array_required_valid(array $input, array $filter)
+{
+    foreach ($input as $key => $value) {
+        if ($value == false && !is_null($value)) return false;
+        if (!isset($filter[$key]['optional']) || !$filter[$key]['optional']) {
+            if ($value == null) return false;
+        }
+    }
+
+    return true;
+}

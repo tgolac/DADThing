@@ -48,11 +48,11 @@
     <index id="14" parent="4" name="comment_id">
       <ColNames>comment_id</ColNames>
     </index>
-    <index id="15" parent="4" name="user_id">
-      <ColNames>user_id</ColNames>
-    </index>
-    <index id="16" parent="4" name="location_id">
+    <index id="15" parent="4" name="location_id">
       <ColNames>location_id</ColNames>
+    </index>
+    <index id="16" parent="4" name="user_id">
+      <ColNames>user_id</ColNames>
     </index>
     <key id="17" parent="4" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>

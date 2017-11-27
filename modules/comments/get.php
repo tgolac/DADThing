@@ -1,11 +1,7 @@
 <?php
 require_once 'comments.php';
 $filters = array(
-    'comment' => array(
-        'filter' => FILTER_SANITIZE_STRING,
-        'options' => array('min_range' => 1, 'max_range' => 10000),
-    ),
-    'comment_id' => array(
+    'id' => array(
         'filter' => FILTER_SANITIZE_NUMBER_INT,
         'optional' => true
     ),
