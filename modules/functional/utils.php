@@ -28,11 +28,28 @@ function hash_password($password, $salt = null)
 function filter_input_array_required_valid(array $input, array $filter)
 {
     foreach ($input as $key => $value) {
-        if ($value == false && !is_null($value)) return false;
+        if ($value == false && !is_null($value) && is_bool($value)) return false;
         if (!isset($filter[$key]['optional']) || !$filter[$key]['optional']) {
-            if ($value == null) return false;
+            if ($value == null) {
+                return false;
+            }
         }
     }
 
     return true;
+}
+
+function get_input_errors(array $input, array $filter)
+{
+    $errors = array();
+    foreach ($input as $key => $value) {
+        if ($value == false && !is_null($value) && is_bool($value)) {
+            $errors[$key] = "Variable is not valid for this field!";
+        } elseif ((!isset($filter[$key]['optional']) || !$filter[$key]['optional']) && $value == null) {
+            $errors[$key] = "Variable is empty!";
+        } else {
+            $errors[$key] = $value;
+        }
+    }
+    return $errors;
 }

@@ -10,7 +10,7 @@ $filters = array(
 );
 if ($input = filter_input_array(INPUT_POST, $filters)) {
 	if (filter_input_array_required_valid($input, $filters)) {
-		$stmt = getDB()->prepare("SELECT c.id, CONCAT(u.first_name, ' ', u.last_name) AS 'fullname', u.username, c.location_id, c.location_type, c.comment, c.created FROM comments c LEFT JOIN users u ON c.user_id = u.id WHERE c.location_id=:location_id AND c.location_type=:location_type");
+		$stmt = getDB()->prepare("SELECT p.id, CONCAT(u.first_name, ' ', u.last_name) AS 'fullname', u.username, p.title, p.content, p.created FROM posts p LEFT JOIN users u ON p.user_id = u.id LIMIT g:start,:limit");
 		$stmt->bindParam(':location_id', $input['location_id']);
 		$stmt->bindParam(':location_type', $input['location_type']);
 		$stmt->execute() or die(print_r($stmt->errorInfo(), true));
