@@ -5,7 +5,11 @@ function apiCall(module, action, post_data, func) {
         data: post_data,
         dataType: "json",
         success: function (data) {
-            func(data);
+            if (data['status'] === 1) {
+                func(data);
+            } else if (data['status'] === -3) {
+                window.location.href = "/?loc=LOGIN";
+            }
         }
     }).fail(function (error) {
         alert(error);
@@ -38,24 +42,35 @@ function generateComments(parent, location_id = 0, location_type = "GLOBAL") {
 
 function generatePost(parent, id) {
     getUiTemplate("post", function (postTemplate) {
-        const post = $(postTemplate);
-        parent.append(post);
         apiCall(
             "posts", "get",
             {
                 id: id
             },
             function (data) {
-                post.find('#')
-                $.each(data['data'], function (i, item) {
-                    post.find("#title").text(item['title']);
-                    post.find("#user").text(item['fullname']);
-                    post.find("#created").text(item['created']);
-                    post.find("#content").text(item['content']);
-                });
+                const post = $(postTemplate);
+                let postData = data['data'];
+                post.find('#title').text(postData['title']);
+                post.find('#user').text(postData['fullname']);
+                post.find('#created').text(postData['created']);
+                post.find('#content').text(postData['content']);
+                post.find('#location_id').attr('value', postData['id']);
+                post.find('#location_type').attr('value', 'POST');
+                post.find('#commentForm').submit(commentFormHandler);
+                parent.append(post);
+                generateComments(post.find("#comments"), postData['id'], 'POST')
             }
         )
     })
+}
+
+function createComment(parent, data) {
+    apiCall("comments", "create", data,
+        function (data) {
+            parent.find('#comments').empty();
+            generateComments(parent.find("#comments"), data['location_id'], data['location_type'])
+        }
+    );
 }
 
 function getUiTemplate(name, func) {
@@ -63,4 +78,9 @@ function getUiTemplate(name, func) {
         url: "ui/" + name + ".html",
         success: func
     });
+}
+
+function commentFormHandler(e) {
+    e.preventDefault();
+    createComment($(this).parent(), objectify(this));
 }

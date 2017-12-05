@@ -33,7 +33,7 @@ if ($input = filter_input_array(INPUT_POST, $filters)) {
             if ($data = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
                 die(json_encode(array(
                     "status" => 1,
-                    "data" => $data
+                    "data" => $stmt->rowCount() == 1 ? $data[0] : $data
                 )));
             }
         } else {

@@ -7,16 +7,22 @@ $filters = array(
 	'title' => array(
 		'filter' => FILTER_SANITIZE_STRING
 	),
-	'content' => array(
-	)
+	'content' => array()
 );
-if ($input = filter_input_array(INPUT_POST, $filters)) {
+if (!isset($_SESSION['user']['id'])) {
+	die(json_encode(array(
+			"status" => -3
+	)));
+} elseif ($input = filter_input_array(INPUT_POST, $filters)) {
 	if (filter_input_array_required_valid($input, $filters)) {
 		$stmt = getDB()->prepare("INSERT INTO posts (user_id, title, content, created) VALUES (:user_id, :title, :content, NOW())");
 		$stmt->bindParam(':user_id', $_SESSION['user']['id']);
 		$stmt->bindParam(':title', $input['title']);
 		$stmt->bindParam(':content', $input['content']);
 		$stmt->execute() or die(print_r($stmt->errorInfo(), true));
+		die(json_encode(array(
+			"status" => 1
+		)));
 	} else {
 		die(json_encode(array(
 				"status" => -1,

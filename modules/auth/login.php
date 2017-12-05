@@ -23,14 +23,20 @@ if ($input = filter_input_array(INPUT_POST, $filters)) {
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name']
                 );
-                echo("Successfully logged in!");
+                die(json_encode(array(
+                	"status" => 1
+                )));
             } else {
-                die("Username/password is incorrect!");
+	            die(json_encode(array(
+		            "status" => -3
+	            )));
             }
         } else {
             die(print_r($stmt->errorInfo(), true));
         }
     } else {
-        die("User does not exist!");
+	    die(json_encode(array(
+		    "status" => -3
+	    )));
     }
 }
