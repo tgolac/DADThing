@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">News Feed</a>
+                <a class="nav-link" href="?page=news">News Feed</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
+                <a class="nav-link" href="?page=about">About us</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -21,7 +21,7 @@
                     <a class="dropdown-item" href="#">Security equipment</a>
                     <a class="dropdown-item" href="#">Products</a>
                     <a class="dropdown-item" href="#">Check-boxes</a>
-                    <a class="dropdown-item" href="comments.html">Comments</a>
+                    <a class="dropdown-item" href="../components/comments.html">Comments</a>
 
                 </div>
             <li class="nav-item">

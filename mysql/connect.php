@@ -2,6 +2,7 @@
 $db = null;
 
 const ERROR_SUCCESS = 1;
+const ERROR_ZERO_RESULTS = 0;
 const ERROR_FIELDS = -1;
 const ERROR_SYSTEM = -2;
 const ERROR_LOGIN = -3;
