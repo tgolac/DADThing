@@ -1,5 +1,7 @@
 <?php
 include "mysql/connect.php";
+include_once "modules/functional/utils.php";
+session_start()
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +13,11 @@ include "mysql/connect.php";
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styleGroup.css">
+    <link href="queries.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
@@ -19,15 +26,42 @@ include "mysql/connect.php";
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            crossorigin="anonymous"></script>
     <script src="js/api.js"></script>
     <script src="js/forms.js"></script>
+    <script src="aboutUs.js"></script>
 </head>
 <body>
-<?php include 'ui/login.html' ?>
-<div id="post"></div>
-<? include 'modules/header.php' ?>
-<script type="text/javascript">
-    generatePost($('#post'), 1);
-</script>
+<?php
+include 'ui/header.php';
+if (isset($_GET['page'])) {
+    switch ($_GET['page']) {
+        case "login":
+            include 'ui/login.html';
+            break;
+        case "register":
+            include 'ui/register.html';
+            break;
+        case "about":
+            include 'ui/hero.html';
+            include 'ui/aboutUs.html';
+            break;
+        case "logout":
+            if(isset($_SESSION['user'])) {
+                unset($_SESSION['user']);
+            }
+            header("Location: " . $_SERVER['PHP_SELF'] . "?page=login");
+    }
+} else {
+    include 'ui/hero.html';
+    include 'ui/aboutUs.html';
+}
+?>
+<!--<div id="post"></div>-->
+<!--<script type="text/javascript">-->
+<!--    generatePost($('#post'), 1);-->
+<!--</script>-->
+
 </body>
 </html>

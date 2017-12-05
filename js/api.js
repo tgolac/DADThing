@@ -1,14 +1,25 @@
-function apiCall(module, action, post_data, func) {
+const ERROR_SUCCESS = 1;
+const ERROR_FIELDS = -1;
+const ERROR_SYSTEM = -2;
+const ERROR_LOGIN = -3;
+const ERROR_ALERT = -4;
+
+function apiCall(module, action, post_data, func, func2) {
+    func2 = func2 || function (data) {
+
+    };
     $.ajax({
         type: "POST",
         url: "modules/" + module + "/" + action + ".php",
         data: post_data,
         dataType: "json",
         success: function (data) {
-            if (data['status'] === 1) {
+            if (data['status'] === ERROR_SUCCESS) {
                 func(data);
-            } else if (data['status'] === -3) {
-                window.location.href = "/?loc=LOGIN";
+            } else if (data['status'] === ERROR_LOGIN) {
+                window.location.href = "?loc=LOGIN";
+            } else {
+                func2(data);
             }
         }
     }).fail(function (error) {

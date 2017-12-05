@@ -1,5 +1,12 @@
 <?php
 $db = null;
+
+const ERROR_SUCCESS = 1;
+const ERROR_FIELDS = -1;
+const ERROR_SYSTEM = -2;
+const ERROR_LOGIN = -3;
+const ERROR_ALERT = -4;
+
 error_reporting(E_ALL | E_STRICT);
 function getDB()
 {

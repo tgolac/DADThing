@@ -42,17 +42,35 @@ if ($input = filter_input_array(INPUT_POST, $filters)) {
                 echo($to);
                 if (mail($to, $subject, $message, $headers)) {
                     $stmt->execute() or die(print_r($stmt->errorInfo(), true));
-                    echo("User successfully registered!");
+                    die(json_encode(array(
+                        "status" => ERROR_SUCCESS
+                    )));
                 } else {
-                    die("Error while sending email!");
+                    die(json_encode(array(
+                        "status" => ERROR_ALERT,
+                        "alert" => "Error sending email"
+                    )));
                 }
             } else {
-                die("Email exists");
+                die(json_encode(array(
+                    "status" => ERROR_ALERT,
+                    "alert" => "Email exists"
+                )));
             }
         } else {
-            die("Username exists");
+            die(json_encode(array(
+                "status" => ERROR_ALERT,
+                "alert" => "Username exists"
+            )));
         }
     } else {
-        die(json_encode($input));
+        die(json_encode(array(
+                "status" => ERROR_FIELDS,
+                "errors" => get_input_errors($input, $filters))
+        ));
     }
+} else {
+    die(json_encode(array(
+        "status" => ERROR_SYSTEM
+    )));
 }

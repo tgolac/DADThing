@@ -1,0 +1,55 @@
+
+@media only screen and (max-width: 1900px) {
+    
+    
+    
+}
+
+
+
+
+@media only screen and (max-width: 1700px) {
+    
+    
+}
+
+@media only screen and (max-width: 1500px) {
+    
+       
+}
+
+
+
+
+
+@media only screen and (min-width: 300px) and (max-width: 800px)
+{
+    .hero
+    {
+        background-image:linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url('images/hero/header-tablet-portrait.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    .herotext
+    {
+        padding-top: 30%;
+    }
+    
+    .hero h1
+    {
+        font-size: 2em;
+    }
+    
+    .hero h2
+    {
+        font-size: 1.5em;
+    }
+    
+    
+    
+    
+    
+}
+
+

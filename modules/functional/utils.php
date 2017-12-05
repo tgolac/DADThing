@@ -53,3 +53,8 @@ function get_input_errors(array $input, array $filter)
     }
     return $errors;
 }
+
+function logged_in()
+{
+    return isset($_SESSION['user']);
+}
