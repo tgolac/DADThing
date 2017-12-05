@@ -21,7 +21,7 @@
                     <a class="dropdown-item" href="#">Security equipment</a>
                     <a class="dropdown-item" href="#">Products</a>
                     <a class="dropdown-item" href="#">Check-boxes</a>
-                    <a class="dropdown-item" href="../components/comments.html">Comments</a>
+                    <a class="dropdown-item" href="../components/comments.php">Comments</a>
 
                 </div>
             <li class="nav-item">

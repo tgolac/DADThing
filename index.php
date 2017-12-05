@@ -47,10 +47,13 @@ if (isset($_GET['page'])) {
             break;
         case "post":
             if(isset($_GET['id'])) {
-                include 'ui/pages/post.php';
+                include 'ui/pages/post/read.php';
             } else {
                 include 'ui/pages/404.html';
             }
+            break;
+        case "post_create":
+            include 'ui/pages/post/create.php';
             break;
         case "about":
             include 'ui/pages/hero.html';
